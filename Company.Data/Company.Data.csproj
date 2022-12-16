@@ -16,9 +16,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Company.Common\Company.Common.csproj" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
 
 </Project>
