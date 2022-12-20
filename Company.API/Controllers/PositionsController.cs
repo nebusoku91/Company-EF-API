@@ -1,5 +1,4 @@
 ﻿using Company.API.Extensions;
-
 namespace Company.API.Controllers;
 
 [Route("api/[controller]")]

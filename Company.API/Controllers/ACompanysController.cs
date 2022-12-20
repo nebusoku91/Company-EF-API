@@ -1,13 +1,12 @@
-﻿
+﻿namespace Company.API.Controllers;
 
-namespace Company.API.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class CompanysController : ControllerBase
+public class ACompanysController : ControllerBase
 {
 
     private readonly IDbService _db;
-    public CompanysController(IDbService db) => _db = db;
+    public ACompanysController(IDbService db) => _db = db;
 
     [HttpGet]
     public async Task<IResult> Get() =>

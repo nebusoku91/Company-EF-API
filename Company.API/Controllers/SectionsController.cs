@@ -2,10 +2,10 @@
 
 [Route("api/[controller]")]
 [ApiController]
-public class DepartmentsController : ControllerBase
+public class SectionsController : ControllerBase
 {
     private readonly IDbService _db;
-    public DepartmentsController(IDbService db) => _db = db;
+    public SectionsController(IDbService db) => _db = db;
 
     [HttpGet]
     public async Task<IResult> Get() =>
@@ -16,12 +16,12 @@ public class DepartmentsController : ControllerBase
         await _db.HttpSingleAsync<Section, SectionDTO>(id);
 
     [HttpPost]
-    public async Task<IResult> Post([FromBody] SectionDTO department) =>
-        await _db.HttpPostAsync<Section, SectionDTO>(department);
+    public async Task<IResult> Post([FromBody] SectionDTO section) =>
+        await _db.HttpPostAsync<Section, SectionDTO>(section);
 
     [HttpPut("{id}")]
-    public async Task<IResult> Put(int id, [FromBody] SectionDTO department) =>
-        await _db.HttpPutAsync<Section, SectionDTO>(id, department);
+    public async Task<IResult> Put(int id, [FromBody] SectionDTO section) =>
+        await _db.HttpPutAsync<Section, SectionDTO>(id, section);
 
     [HttpDelete("{id}")]
     public async Task<IResult> Delete(int id) =>
