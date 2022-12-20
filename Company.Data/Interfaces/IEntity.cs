@@ -1,7 +1,6 @@
-﻿namespace Company.Data.Interfaces
+﻿namespace Company.Data.Interfaces;
+
+public interface IEntity
 {
-    public interface IEntity
-    {
-        public int ID { get; set; }
-    }
+    public int ID { get; set; }
 }

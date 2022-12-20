@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Company.Data.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +8,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<CompanyContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("CompanyConnection")));
+builder.Services.AddDbContext<CompanyContext>(options =>
+    options.UseSqlServer
+        (builder.Configuration.GetConnectionString("CompanyConnection")));
 
+ConfigureAutoMapper(builder.Services);
+ConfigureServices(builder.Services);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,3 +30,22 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+void ConfigureAutoMapper(IServiceCollection services)
+{
+    var config = new MapperConfiguration(cfg =>
+    {
+        cfg.CreateMap<ACompany, ACompanyDTO>().ReverseMap();
+        cfg.CreateMap<Section, SectionDTO>().ReverseMap();
+        cfg.CreateMap<Employee, EmployeeDTO>().ReverseMap();
+        cfg.CreateMap<Position, PositionDTO>().ReverseMap();
+        cfg.CreateMap<EmployeePosition, EmployeePositionDTO>().ReverseMap();
+    });
+    var mapper = config.CreateMapper();
+    services.AddSingleton(mapper);
+}
+
+void ConfigureServices(IServiceCollection services)
+{
+    services.AddScoped<IDbService, DbService>();
+}
